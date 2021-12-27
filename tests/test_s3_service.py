@@ -14,7 +14,9 @@ from services.s3_service import S3Service
 class TestS3Service(TestCase):
     @mock_s3
     def test_upload_object(self):
-        logger.debug(f"{self.__class__.__name__}.{inspect.currentframe().f_code.co_name}")
+        logger.debug(
+            f"{self.__class__.__name__}.{inspect.currentframe().f_code.co_name}"
+        )
         s3_client = boto3.client("s3", region_name=config("AWS_REGION"))
         s3_client.create_bucket(
             Bucket=config("AWS_BUCKET"),
