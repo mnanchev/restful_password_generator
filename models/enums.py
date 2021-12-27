@@ -2,5 +2,5 @@ import enum
 
 
 class RoleType(enum.Enum):
-    creator = "creator"
-    viewer = "viewer"
+    ANONYMOUS_VIEWER = "anonymous_viewer"
+    SIGNED_CREATOR = "signed_creator"

@@ -1,11 +1,12 @@
 from decouple import config
-from pynamodb.models import Model
 from pynamodb.attributes import UnicodeAttribute, BooleanAttribute
+from pynamodb.models import Model
 
 
 class User(Model):
     class Meta:
         table_name = config("SHARED_PASSWORDS_POOL")
+
     email = UnicodeAttribute(hash_key=True)
     password = UnicodeAttribute()
     id = UnicodeAttribute(range_key=True)
