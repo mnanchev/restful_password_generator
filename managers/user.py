@@ -1,29 +1,22 @@
-import uuid
-
-from pynamodb.exceptions import PutError
-from werkzeug.exceptions import BadRequest, InternalServerError
+from werkzeug.exceptions import BadRequest
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models.user import User
+from db import db
+from models.creator import CreatorModel
 
 
 class UserManager:
     @staticmethod
     def register(user_data):
-        user = User(
-            user_data["email"],
-            password=generate_password_hash(user_data["password"]),
-            id=uuid.uuid4(),
-        )
-        try:
-            user.save()
-        except PutError as put_exception:
-            raise InternalServerError(put_exception.msg)
-        return user
+        user_data["password"] = generate_password_hash(user_data["password"])
+        user = CreatorModel(**user_data)
+        db.session.add(user)
+        db.session.flush()
 
     @staticmethod
     def login(user_data):
-        user = User.query(user_data["email"], User.password.exists())
+        user = CreatorModel.query.filter_by(email=user_data["email"]).first()
         if not user or not check_password_hash(user.password, user_data["password"]):
             raise BadRequest("Wrong email or password")
+
         return user
