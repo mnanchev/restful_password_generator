@@ -1,4 +1,5 @@
 from flask_restful import Resource, request
+
 from managers.auth import AuthManager
 from managers.user import UserManager
 from models.enums import RoleType
@@ -20,4 +21,4 @@ class Login(Resource):
     def post(self):
         user = UserManager.login(request.get_json())
         token = AuthManager.encode_token(user)
-        return {"token": token, "role": RoleType.SIGNED_CREATOR}, 200
+        return {"token": token, "role": RoleType.SIGNED_CREATOR.value}, 200

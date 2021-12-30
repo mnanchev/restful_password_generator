@@ -1,5 +1,5 @@
 import boto3
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, ParamValidationError
 from decouple import config
 from loguru import logger
 from werkzeug.exceptions import InternalServerError, BadRequest
@@ -40,4 +40,7 @@ class SecretsManagerService:
                 raise InternalServerError(
                     "Provider is not available at the moment.\n Please try again later"
                 )
+        except ParamValidationError as param_validation_error:
+            raise BadRequest(str(param_validation_error))
+
         return response

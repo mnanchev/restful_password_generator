@@ -5,6 +5,10 @@ from decouple import config
 from flask_httpauth import HTTPTokenAuth
 from werkzeug.exceptions import BadRequest
 
+from models import CreatorModel
+
+RoleMapping = {"CreatorModel": CreatorModel}
+
 
 class AuthManager:
     @staticmethod
@@ -32,6 +36,6 @@ auth = HTTPTokenAuth(scheme="Bearer")
 
 @auth.verify_token
 def verify_token(token):
-    email, role = AuthManager.decode_token(token)
-    user = eval(f"{role}.query({email}, {role}.password.exists())")
+    user_id, role = AuthManager.decode_token(token)
+    user = RoleMapping[role]
     return user
