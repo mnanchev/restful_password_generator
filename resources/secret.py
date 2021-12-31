@@ -24,4 +24,4 @@ class Secret(Resource):
             "RequireEachIncludedType": user_data.get("RequireEachIncludedType", False),
         }
         req_id = SecretManager().create_secret(user_data, secret_params)
-        return {"url": f"{config('DOMAIN')}/getSecret/{req_id}"}, 201
+        return {"message": f"{config('DOMAIN')}/getSecret/{req_id}"}, 201

@@ -13,7 +13,7 @@ class Register(Resource):
         data = request.get_json()
         user = UserManager.register(data)
         token = AuthManager.encode_token(user)
-        return {"token": token}, 201
+        return {"message": "Success", "token": token}, 201
 
 
 class Login(Resource):
@@ -21,4 +21,11 @@ class Login(Resource):
     def post(self):
         user = UserManager.login(request.get_json())
         token = AuthManager.encode_token(user)
-        return {"token": token, "role": RoleType.SIGNED_CREATOR.value}, 200
+        return (
+            {
+                "message": "Success",
+                "token": token,
+                "role": RoleType.SIGNED_CREATOR.value,
+            },
+            200,
+        )

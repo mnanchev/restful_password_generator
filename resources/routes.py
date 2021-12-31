@@ -6,5 +6,10 @@ routes = (
     (Register, "/register"),
     (Login, "/login"),
     (Secret, "/generateSecret"),
-    (SecretDetail, "/getSecret/<string:secret_id>"),
+    (
+        SecretDetail,
+        "/getSecret/<string:secret_id>",
+        "/putSecret/<string:secret_id>",
+        "/deleteSecret/<string:secret_id>",
+    ),
 )

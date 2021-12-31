@@ -2,7 +2,7 @@ import uuid
 
 from flask import request
 from sqlalchemy.exc import IntegrityError
-from werkzeug.exceptions import BadRequest, Forbidden
+from werkzeug.exceptions import BadRequest, Forbidden, NotFound
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import db
@@ -54,3 +54,28 @@ class SecretManager:
         ):
             raise Forbidden("You do not have access to this resource")
         return query.secret
+
+    @staticmethod
+    def update_secret(user_data, secret_id):
+        secret_query = SecretModel.query.filter_by(id=secret_id)
+        if not secret_query:
+            raise NotFound("Secret does not exist")
+        user_id = AuthManager.decode_token(auth.get_auth()["token"])[0]
+        if not user_id == secret_query.first().creator_id:
+            raise NotFound("Secret does not exist")
+        secret_query.update(user_data)
+        db.session.add(secret_query.first())
+        db.session.flush()
+        return secret_query
+
+    @staticmethod
+    def delete_secret(secret_id):
+        secret_query = SecretModel.query.filter_by(id=secret_id)
+        print("END", secret_query.first())
+        if not secret_query or not secret_query.first():
+            raise NotFound("Secret does not exist")
+        user_id = AuthManager.decode_token(auth.get_auth()["token"])[0]
+        if not user_id == secret_query.first().creator_id:
+            raise NotFound("Secret does not exist")
+        db.session.delete(secret_query.first())
+        db.session.flush()
