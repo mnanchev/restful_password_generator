@@ -1,9 +1,9 @@
-from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import BadRequest
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import db
 from models.creator import CreatorModel
+from utils.helpers import flush_db
 
 
 class UserManager:
@@ -12,10 +12,7 @@ class UserManager:
         user_data["password"] = generate_password_hash(user_data["password"])
         user = CreatorModel(**user_data)
         db.session.add(user)
-        try:
-            db.session.flush()
-        except IntegrityError:
-            raise BadRequest("Email already exists")
+        flush_db()
         return user
 
     @staticmethod

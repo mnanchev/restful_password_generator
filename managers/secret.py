@@ -13,6 +13,7 @@ from utils.helpers import (
     check_if_query_is_valid,
     check_if_user_has_permissions_over_resource,
     remove_not_required_model_keys,
+    flush_db,
 )
 
 SECRETS_MANAGER_SERVICE = SecretsManagerService()
@@ -32,10 +33,7 @@ class SecretManager:
         user_data["id"] = str(uuid.uuid4())
         secret = SecretModel(**user_data)
         db.session.add(secret)
-        try:
-            db.session.flush()
-        except IntegrityError:
-            raise BadRequest("Duplicated key error")
+        flush_db()
         return secret.id
 
     @staticmethod
@@ -51,7 +49,7 @@ class SecretManager:
         ):
             raise Forbidden("You do not have access to this resource")
         db.session.delete(secret_query)
-        db.session.flush()
+        flush_db()
         return secret_query.secret
 
     @staticmethod
@@ -61,7 +59,7 @@ class SecretManager:
         check_if_user_has_permissions_over_resource(secret_query)
         secret_query.update(user_data)
         db.session.add(secret_query.first())
-        db.session.flush()
+        flush_db()
         return secret_query
 
     @staticmethod
@@ -70,4 +68,7 @@ class SecretManager:
         check_if_query_is_valid(secret_query)
         check_if_user_has_permissions_over_resource(secret_query)
         db.session.delete(secret_query.first())
-        db.session.flush()
+        try:
+            db.session.flush()
+        except IntegrityError:
+            raise BadRequest("Duplicated key error")
