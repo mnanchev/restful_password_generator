@@ -21,8 +21,7 @@ def _conclude_request(resp):
     except PendingRollbackError as pending_rollback_exception:
         db.session.rollback()
         logger.error("Pending rollback exception", pending_rollback_exception)
-    except Exception as exception:
-        logger.log(exception)
+    except Exception:
         raise InternalServerError("Server is unavailable. Please try again later")
     finally:
         db.session.close()

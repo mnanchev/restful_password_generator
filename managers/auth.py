@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Type
 
 import jwt
 from decouple import config
@@ -7,7 +8,7 @@ from werkzeug.exceptions import BadRequest
 
 from models import CreatorModel
 
-RoleMapping = {"CreatorModel": CreatorModel}
+RoleMapping: dict[str, Type[CreatorModel]] = {"CreatorModel": CreatorModel}
 
 
 class AuthManager:
