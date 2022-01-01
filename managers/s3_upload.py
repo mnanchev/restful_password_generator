@@ -13,10 +13,11 @@ class S3UploadManager:
         root_dir = os.path.dirname(os.path.abspath(__file__))
         file_path = os.path.join(root_dir, file.filename)
         file.save(file_path)
-        user_data = request.get_json()
-        if user_data and "expiration_time" in user_data:
+        print("Files", request.form)
+        form_data = request.form
+        if form_data and "expiration_time" in form_data:
             url = s3_service.upload_object(
-                file_path, file.filename, request.get_json()["expiration_time"]
+                file_path, file.filename, form_data["expiration_time"]
             )
         else:
             url = s3_service.upload_object(file_path, file.filename, 3600)

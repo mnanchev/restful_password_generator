@@ -4,9 +4,7 @@ from flask_restful import Resource
 
 from managers.auth import auth
 from managers.secret import SecretManager
-from schemas.requests.updated_secret_schema import (
-    UpdatedSecretSchema,
-)
+from schemas.requests.updated_secret_schema import UpdatedSecretSchema
 from utils.decorators import validate_schema
 
 
