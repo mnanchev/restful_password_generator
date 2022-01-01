@@ -1,6 +1,7 @@
 import uuid
 
 import boto3
+from botocore.config import Config
 from botocore.exceptions import ClientError
 from decouple import config
 from loguru import logger
@@ -18,22 +19,28 @@ class S3Service:
             aws_access_key_id=self.key,
             aws_secret_access_key=self.secret,
             region_name=self.region,
+            config=Config(signature_version="s3v4"),
         )
 
-    def __generate_pre_signed_url(self, expiration_time, object_name):
+    def __generate_pre_signed_url(
+        self, expiration_time, object_name, key_prefix, operation_name="get_object"
+    ):
         url = self.s3.generate_presigned_url(
-            "get_object",
-            Params={"Bucket": self.bucket_name, "Key": f"{uuid.uuid4()}/{object_name}"},
+            operation_name,
+            Params={"Bucket": self.bucket_name, "Key": f"{key_prefix}/{object_name}"},
             ExpiresIn=expiration_time,
         )
         return url
 
     def upload_object(self, file_name, object_name, expiration_time):
         try:
+            key_prefix = str(uuid.uuid4())
             self.s3.upload_file(
-                file_name, self.bucket_name, object_name,
+                file_name, self.bucket_name, f"{key_prefix}/{object_name}",
             )
-            return self.__generate_pre_signed_url(expiration_time, object_name)
+            return self.__generate_pre_signed_url(
+                expiration_time, object_name, key_prefix
+            )
         except ClientError as client_error:
             logger.exception(
                 "Provider is not available at the moment.\n Please try again later",
