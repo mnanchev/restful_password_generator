@@ -24,3 +24,13 @@ def check_if_file_attached(func):
         return func(*args, **kwargs)
 
     return decorated_func
+
+
+def check_if_object_name_exists(func):
+    def decorated_func(*args, **kwargs):
+        user_data = request.get_json()
+        if (not user_data) or ("object_name" not in user_data):
+            raise BadRequest("No object name")
+        return func(*args, **kwargs)
+
+    return decorated_func
