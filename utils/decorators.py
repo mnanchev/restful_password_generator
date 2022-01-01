@@ -17,7 +17,7 @@ def validate_schema(schema_name):
     return wrapper
 
 
-def check_if_file_exists(func):
+def check_if_file_attached(func):
     def decorated_func(*args, **kwargs):
         if not request.files:
             raise BadRequest("No file part")

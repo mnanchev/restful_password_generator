@@ -1,11 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import NotFound, BadRequest
 
+from constants import NOT_EXISTING, REQUIRED_KEYS
 from db import db
 from managers.auth import AuthManager, auth
-
-REQUIRED_KEYS = ["secret", "password", "is_password_protected", "creator_id"]
-NOT_EXISTING = "Secret does not exist"
 
 
 def check_if_query_is_valid(query):

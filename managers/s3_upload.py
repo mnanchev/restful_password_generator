@@ -15,9 +15,21 @@ class S3UploadManager:
         file.save(file_path)
         user_data = request.get_json()
         if user_data and "expiration_time" in user_data:
-            s3_service.upload_object(
+            url = s3_service.upload_object(
                 file_path, file.filename, request.get_json()["expiration_time"]
             )
         else:
             url = s3_service.upload_object(file_path, file.filename, 3600)
+        return url
+
+    @staticmethod
+    def get_upload_url():
+        s3_service = S3Service()
+        user_data = request.get_json()
+        if user_data and "expiration_time" in user_data:
+            url = s3_service.get_upload_url(
+                user_data["expiration_time"], user_data["object_name"]
+            )
+        else:
+            url = s3_service.get_upload_url(3600, user_data["object_name"])
         return url

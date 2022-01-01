@@ -7,6 +7,8 @@ from decouple import config
 from loguru import logger
 from werkzeug.exceptions import InternalServerError
 
+from constants import NOT_AVAILABLE
+
 
 class S3Service:
     def __init__(self):
@@ -43,9 +45,18 @@ class S3Service:
             )
         except ClientError as client_error:
             logger.exception(
-                "Provider is not available at the moment.\n Please try again later",
-                client_error,
+                NOT_AVAILABLE, client_error,
             )
-            raise InternalServerError(
-                "Provider is not available at the moment.\n Please try again later"
+            raise InternalServerError(NOT_AVAILABLE)
+
+    def get_upload_url(self, expiration_time, object_name):
+        try:
+            key_prefix = str(uuid.uuid4())
+            return self.__generate_pre_signed_url(
+                expiration_time, object_name, key_prefix, "put_object"
             )
+        except ClientError as client_error:
+            logger.exception(
+                NOT_AVAILABLE, client_error,
+            )
+            raise InternalServerError(NOT_AVAILABLE)
