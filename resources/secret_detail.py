@@ -18,7 +18,7 @@ class SecretDetail(Resource):
     def put(self, secret_id):
         user_data = request.get_json()
         SecretManager().update_secret(user_data, secret_id)
-        return {"message": f"{config('DOMAIN')}/getSecret/{secret_id}"}, 201
+        return {"message": f"{config('DOMAIN')}/getSecret/{secret_id}"}, 200
 
     @auth.login_required
     def delete(self, secret_id):

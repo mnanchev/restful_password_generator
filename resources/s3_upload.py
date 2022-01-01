@@ -20,4 +20,4 @@ class S3Upload(Resource):
     @check_if_object_name_exists
     def get(self):
         url = self.s3_upload_manager.get_upload_url()
-        return {"message": "Upload url generated successfully", "url": url}, 201
+        return {"message": "Upload url generated successfully", "url": url}, 200

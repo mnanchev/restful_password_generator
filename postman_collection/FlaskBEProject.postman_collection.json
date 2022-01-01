@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "cac55b72-b56b-429a-b8da-665fd50cae19",
+		"name": "FlaskBEProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "string",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"martin2754@gmail.com\",\n    \"password\": \"nanchev12!dsa3\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"martin2759@gmail.com\",\n    \"password\": \"nanchev12!dsa3\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GenerateSecret",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "string"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk",
+						"type": "string"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"PasswordLength\": 255,\n    \"ExcludeCharacters\": \"\",\n    \"ExcludeNumbers\": false,\n    \"ExcludePunctuation\":  true,\n    \"ExcludeUppercase\": true,\n    \"ExcludeLowercase\": true,\n    \"IncludeSpace\": false,\n    \"secret\":\"hello world gosho!\",\n    \"password\":\"pesho\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/generateSecret",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"generateSecret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSecret",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"pesho\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/getSecret/:secret_id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"getSecret",
+						":secret_id"
+					],
+					"query": [
+						{
+							"key": "secret_id=ecbfc9aa-5de3-418f-84b1-fa05cd48eb90",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": [
+						{
+							"key": "secret_id",
+							"value": "7c58ce7d-8c6b-4752-a997-11f6e5ec7b6a",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSecret",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"secret\":\"mnanchev\",\n    \"password\":\"dskaljdlkaskd;askd;assdlcmx123\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/putSecret/:secret_id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"putSecret",
+						":secret_id"
+					],
+					"variable": [
+						{
+							"key": "secret_id",
+							"value": "b0fe447f-9a5f-4f2a-8741-39f374a3c08a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteSecret",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5000/deleteSecret/:secret_id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"deleteSecret",
+						":secret_id"
+					],
+					"variable": [
+						{
+							"key": "secret_id",
+							"value": "b0fe447f-9a5f-4f2a-8741-39f374a3c08a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "S3UploadObject",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjYsImV4cCI6MTY0MTE2NDM2NCwicm9sZSI6IkNyZWF0b3JNb2RlbCJ9.Ai7Vsmrc3754TtnXzhR6vXifEvLD4aFNa5D-DoA8k78",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/martin.nanchev@adesso.bg/Downloads/Zoom.pkg"
+						},
+						{
+							"key": "expiration_time",
+							"value": "7200",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "S3GetPresignedUrlForSharing",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE4LCJleHAiOjE2NDEyMjc0NDUsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.lhmqIXNKSKKFV3AgkJwPh8MOtzRwUfwze9srLYVUKHo",
+						"type": "default"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"object_name\":\"application\",\n    \"expiration_time\":7200\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "S3PutViaSignedUrl",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/Users/martin.nanchev@adesso.bg/Downloads/Zoom.pkg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://secret_objects_bucket.s3.amazonaws.com/b9eaa174-1bc5-45b2-b7fe-e5b651d6457d/application?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATKTM7BORTC27OSPS%2F20220101%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220101T190010Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=9cba82b45914c7afe8afc338af9bcdbc6802803101df1fa48885ccfaf22934a8",
+					"protocol": "https",
+					"host": [
+						"secret_objects_bucket",
+						"s3",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"b9eaa174-1bc5-45b2-b7fe-e5b651d6457d",
+						"application"
+					],
+					"query": [
+						{
+							"key": "X-Amz-Algorithm",
+							"value": "AWS4-HMAC-SHA256"
+						},
+						{
+							"key": "X-Amz-Credential",
+							"value": "AKIATKTM7BORTC27OSPS%2F20220101%2Feu-central-1%2Fs3%2Faws4_request"
+						},
+						{
+							"key": "X-Amz-Date",
+							"value": "20220101T190010Z"
+						},
+						{
+							"key": "X-Amz-Expires",
+							"value": "7200"
+						},
+						{
+							"key": "X-Amz-SignedHeaders",
+							"value": "host"
+						},
+						{
+							"key": "X-Amz-Signature",
+							"value": "9cba82b45914c7afe8afc338af9bcdbc6802803101df1fa48885ccfaf22934a8"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

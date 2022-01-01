@@ -31,6 +31,7 @@ marshmallow==3.14.1
 moto==2.3.0
 psycopg2-binary==2.9.3
 pycparser==2.21
+Pygments==2.11.1
 PyJWT==2.3.0
 pyrsistent==0.18.0
 PySocks==1.7.1
