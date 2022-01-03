@@ -47,7 +47,7 @@ The REST API to the example app is described below.
     Status: 201 Created
     Connection: close
     Content-Type: application/json
-    Location: /login/1
+    Location: /register
     Content-Length: 36
 
     {"message": "Success", "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk"}
@@ -94,7 +94,7 @@ The REST API to the example app is described below.
     Status: 200 OK
     Connection: close
     Content-Type: application/json
-    Location: /login/1
+    Location: /login
     Content-Length: 36
 
     {
@@ -198,7 +198,7 @@ The REST API to the example app is described below.
     Status: 404 Not Found
     Connection: close
     Content-Type: application/json
-    Location: /thing/2
+    Location: /getSecret/##############
     Content-Length: 35
 
     {
@@ -236,7 +236,7 @@ The REST API to the example app is described below.
 
 ![Change a secret](./images/change_a_secret.png)
 
-## Attempt to change a Thing without required secret parameter
+## Attempt to change a secret without required secret parameter
 
 ### Request
 
@@ -307,11 +307,11 @@ Only the user, that creates the secret could delete it.
     "message": "Secret does not exist"
     }
 
-## Get deleted Thing
+## Get deleted Secret
 
 ### Request
 
-`GET /thing/1`
+`GET /getSecret/b0fe447f-9a5f-4f2a-8741-39f374a3c08a`
 
     curl --location --request GET 'http://127.0.0.1:5000/getSecret/b0fe447f-9a5f-4f2a-8741-39f374a3c08a' 
     --header 'Content-Type: application/json' 
@@ -351,7 +351,7 @@ Only the user, that creates the secret could delete it.
     Status: 201 Created
     Connection: close
     Content-Type: application/json
-    Location: /login/1
+    Location: /upload
     Content-Length: 36
 
     {
