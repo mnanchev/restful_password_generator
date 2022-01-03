@@ -389,4 +389,4 @@ Only the user, that creates the secret could delete it.
     "url": "https://secret_bucket.s3.amazonaws.com/f502eb0d-456e-40be-b2a1-79b76a36260b/application?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=""%2F20220101%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220101T205932Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=7ac3447fee85101158aa214b3730aad0774ff6cdc90c1887d62eec36d95ea274"
     }
 
-![Get url for external organizations to upload files](./images/get_url_for_uploading_files.png)
+![Get url for external organizations to upload files](./images/get_upload_url_for_external_organizations.png)
