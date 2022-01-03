@@ -114,7 +114,7 @@ The REST API to the example app is described below.
 
     curl --location --request POST 'http://127.0.0.1:5000/generateSecret' 
          --header 'Content-Type: application/json' 
-         --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk' 
+         --header 'Authorization: Bearer eyJ0e' 
          --data-raw '{ "PasswordLength": 255,
                        "ExcludeCharacters": "",
                        "ExcludeNumbers": false,
@@ -215,7 +215,7 @@ The REST API to the example app is described below.
 
     curl --location --request PUT 'http://127.0.0.1:5000/putSecret/31c9831e-ab7e-4fd8-a9b6-c6c21260777a' 
     --header 'Content-Type: application/json' 
-    --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk' 
+    --header 'Authorization: Bearer eyJ0e' 
     --data-raw '{
         "secret":"mnanchev",
         "password":"dskaljdlkaskd;askd;assdlcmx123"
@@ -244,7 +244,7 @@ The REST API to the example app is described below.
 
     curl --location --request PUT 'http://127.0.0.1:5000/putSecret/31c9831e-ab7e-4fd8-a9b6-c6c21260777a' 
     --header 'Content-Type: application/json' 
-    --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk' 
+    --header 'Authorization: Bearer eyJ0e'  
     --data-raw '{}'
 
 
@@ -272,7 +272,7 @@ The REST API to the example app is described below.
 `DELETE /deleteSecret/<string:secret_id>`
 
     curl --location --request DELETE 'http://127.0.0.1:5000/deleteSecret/b0fe447f-9a5f-4f2a-8741-39f374a3c08a' \
-         --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk'
+         --header 'Authorization: Bearer eyJ0eXAi'
 
 ### Response
 
@@ -292,7 +292,7 @@ Only the user, that creates the secret could delete it.
 `DELETE /deleteSecret/<string:secret_id>`
 
     curl --location --request DELETE 'http://127.0.0.1:5000/deleteSecret/b0fe447f-9a5f-4f2a-8741-39f374a3c08a' \
-         --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJleHAiOjE2NDEyMzUxMDMsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.bfnqQgfuHSz-AKAu8Vj3_vWcRlAy2TQwLgz3BoilSUk'
+         --header 'Authorization: Bearer eyJ0e'
 
 ### Response
 
@@ -341,7 +341,7 @@ Only the user, that creates the secret could delete it.
 `POST /upload`
 
     curl --location --request POST 'http://127.0.0.1:5000/upload' \
-        --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjYsImV4cCI6MTY0MTE2NDM2NCwicm9sZSI6IkNyZWF0b3JNb2RlbCJ9.Ai7Vsmrc3754TtnXzhR6vXifEvLD4aFNa5D-DoA8k78' \
+        --header 'Authorization: Bearer eyJ0eXAi' \
         --form 'file=@"/Users/probkotestov/Downloads/Zoom.pkg"'
 
 ### Response
@@ -365,10 +365,10 @@ Only the user, that creates the secret could delete it.
 ## Get url, so third party organizations could upload files to S3
 
 ### Request
-`Get /upload`
+`Get /get_upload_url`
 
-    curl --location --request GET 'http://127.0.0.1:5000/upload' \
-         --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE4LCJleHAiOjE2NDEyMjc0NDUsInJvbGUiOiJDcmVhdG9yTW9kZWwifQ.lhmqIXNKSKKFV3AgkJwPh8MOtzRwUfwze9srLYVUKHo' \
+    curl --location --request GET 'http://127.0.0.1:5000/get_upload_url' \
+         --header 'Authorization: EAy' \
          --header 'Content-Type: application/json' \
          --data-raw '{
             "object_name":"application",
@@ -386,7 +386,7 @@ Only the user, that creates the secret could delete it.
 
     {
     "message": "Upload url generated successfully",
-    "url": "https://secret_bucket.s3.amazonaws.com/f502eb0d-456e-40be-b2a1-79b76a36260b/application?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATKTM7BORTC27OSPS%2F20220101%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220101T205932Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=7ac3447fee85101158aa214b3730aad0774ff6cdc90c1887d62eec36d95ea274"
+    "url": "https://secret_bucket.s3.amazonaws.com/f502eb0d-456e-40be-b2a1-79b76a36260b/application?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=""%2F20220101%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220101T205932Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=7ac3447fee85101158aa214b3730aad0774ff6cdc90c1887d62eec36d95ea274"
     }
 
 ![Get url for external organizations to upload files](./images/get_url_for_uploading_files.png)

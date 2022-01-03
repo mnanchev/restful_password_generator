@@ -8,6 +8,10 @@ from utils.decorators import validate_schema
 
 
 class Register(Resource):
+    """
+    Register a new user
+    """
+
     @validate_schema(CreatorSchema)
     def post(self):
         data = request.get_json()
@@ -17,6 +21,10 @@ class Register(Resource):
 
 
 class Login(Resource):
+    """
+    Login a user
+    """
+
     @validate_schema(CreatorSchema)
     def post(self):
         user = UserManager.login(request.get_json())

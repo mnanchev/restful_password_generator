@@ -2,6 +2,8 @@ from marshmallow import validate, Schema, fields
 
 
 class SecretSchema(Schema):
+    """ Secret schema """
+
     secret = fields.String(required=False, validate=validate.Length(min=1, max=1000000))
     password = fields.String(required=False, validate=validate.Length(min=1, max=32))
     ExcludeCharacters = fields.String(required=False)

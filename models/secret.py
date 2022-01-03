@@ -4,6 +4,8 @@ from db import db
 
 
 class SecretModel(db.Model):
+    """ Secret Model """
+
     __tablename__ = "secrets"
     creator_id = db.Column(db.Integer, db.ForeignKey("creators.id"))
     create_on = db.Column(db.DateTime, server_default=func.now())

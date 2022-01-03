@@ -12,8 +12,14 @@ from services.s3_service import S3Service
 
 
 class TestS3Service(TestCase):
+    """ Test S3Service class """
+
     @mock_s3
     def test_upload_object(self):
+        """
+        Test upload object to S3
+        :return: url of the uploaded object
+        """
         logger.debug(
             f"{self.__class__.__name__}.{inspect.currentframe().f_code.co_name}"
         )

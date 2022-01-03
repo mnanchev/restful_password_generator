@@ -6,8 +6,16 @@ from services.s3_service import S3Service
 
 
 class S3UploadManager:
+    """
+    S3UploadManager class
+    """
+
     @staticmethod
     def upload_file():
+        """
+        Uploads a file to S3
+        :return: url of the uploaded file
+        """
         s3_service = S3Service()
         file = request.files["file"]
         root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +33,10 @@ class S3UploadManager:
 
     @staticmethod
     def get_upload_url():
+        """
+        Gets a presigned url for uploading a file to S3
+        :return: url
+        """
         s3_service = S3Service()
         user_data = request.get_json()
         if user_data and "expiration_time" in user_data:

@@ -6,6 +6,8 @@ from werkzeug.exceptions import InternalServerError, BadRequest
 
 
 class SecretsManagerService:
+    """ Class to interact with AWS Secrets Manager """
+
     def __init__(self):
         self.key = config("AWS_ACCESS_KEY")
         self.secret = config("AWS_SECRET")
@@ -17,6 +19,11 @@ class SecretsManagerService:
         )
 
     def get_random_password(self, password_params):
+        """
+        Get a random password from AWS Secrets Manager
+        :param password_params:
+        :return: response
+        """
         try:
 
             response = self.secrets_manager_client.get_random_password(

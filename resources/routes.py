@@ -13,5 +13,5 @@ routes = (
         "/putSecret/<string:secret_id>",
         "/deleteSecret/<string:secret_id>",
     ),
-    (S3Upload, "/upload"),
+    (S3Upload, "/upload", "/get_upload_url"),
 )

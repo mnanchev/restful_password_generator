@@ -3,6 +3,8 @@ from models.enums import RoleType
 
 
 class CreatorModel(db.Model):
+    """Creator Model"""
+
     __tablename__ = "creators"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)

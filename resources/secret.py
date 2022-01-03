@@ -9,6 +9,8 @@ from utils.decorators import validate_schema
 
 
 class Secret(Resource):
+    """ Secret resource """
+
     @auth.login_required
     @validate_schema(SecretSchema)
     def post(self):

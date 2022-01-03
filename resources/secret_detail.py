@@ -4,11 +4,19 @@ from flask_restful import Resource
 
 from managers.auth import auth
 from managers.secret import SecretManager
-from schemas.requests.updated_secret_schema import UpdatedSecretSchema
-from utils.decorators import validate_schema
+from schemas.requests.get_secret_schema import (
+    GetSecretSchema,
+    GetOrDeleteSecretArgumentsSchema,
+)
+from schemas.requests.update_secret_schema import UpdatedSecretSchema
+from utils.decorators import validate_schema, validate_arguments
 
 
 class SecretDetail(Resource):
+    """ Resource for getting, updating and deleting a secret """
+
+    @validate_schema(GetSecretSchema)
+    @validate_arguments(GetOrDeleteSecretArgumentsSchema)
     def get(self, secret_id):
         secret_id = str(secret_id)
         return {"message": f"{SecretManager.get_secret(secret_id)}"}, 200
@@ -21,6 +29,7 @@ class SecretDetail(Resource):
         return {"message": f"{config('DOMAIN')}/getSecret/{secret_id}"}, 200
 
     @auth.login_required
+    @validate_arguments(GetOrDeleteSecretArgumentsSchema)
     def delete(self, secret_id):
         secret_id = str(secret_id)
         SecretManager().delete_secret(secret_id)

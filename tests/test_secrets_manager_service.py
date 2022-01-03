@@ -8,8 +8,14 @@ from services.secrets_manager_service import SecretsManagerService
 
 
 class TestSecretsManagerService(TestCase):
+    """ Test class for SecretsManagerService """
+
     @mock_secretsmanager
     def test_get_random_password(self):
+        """
+        Test that the get_random_password function returns a random password
+        :return: random password
+        """
         logger.debug(
             f"{self.__class__.__name__}.{inspect.currentframe().f_code.co_name}"
         )
