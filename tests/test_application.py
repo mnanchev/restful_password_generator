@@ -138,7 +138,7 @@ class TestApp(TestCase):
         """
         Test the generate secret route
         """
-        self.HEADERS["Authorization"] = f"Bearer eYiQqQ"
+        self.HEADERS["Authorization"] = "Bearer eYiQqQ"
         resp = self.client.post(
             self.GENERATE_SECRET_PATH,
             data=json.dumps(
@@ -281,7 +281,7 @@ class TestApp(TestCase):
             headers=self.HEADERS,
         )
         self.HEADERS["Authorization"] = f"Bearer {reg_resp.json['token']}"
-        resp = self.client.post(f"/upload", headers=self.HEADERS)
+        resp = self.client.post("/upload", headers=self.HEADERS)
         self.assertEqual(400, resp.status_code)
 
     def test_s3_upload_object_with_file(self):
@@ -300,7 +300,7 @@ class TestApp(TestCase):
         data = {key: str(value) for key, value in data.items()}
         data["file"] = (BytesIO(b"abide"), "test.jpg")
         resp = self.client.post(
-            f"/upload",
+            "/upload",
             headers=self.HEADERS,
             content_type="multipart/form-data",
             data=data,
@@ -319,7 +319,7 @@ class TestApp(TestCase):
         )
 
         self.HEADERS["Authorization"] = f"Bearer {reg_resp.json['token']}"
-        resp = self.client.get(f"/upload", headers=self.HEADERS, data=json.dumps({}),)
+        resp = self.client.get("/upload", headers=self.HEADERS, data=json.dumps({}),)
         print(resp.json)
         self.assertEqual(400, resp.status_code)
 
@@ -336,7 +336,7 @@ class TestApp(TestCase):
 
         self.HEADERS["Authorization"] = f"Bearer {reg_resp.json['token']}"
         resp = self.client.get(
-            f"/upload",
+            "/upload",
             headers=self.HEADERS,
             data=json.dumps({"object_name": "test.jpg"}),
         )
